@@ -42,6 +42,7 @@ gulp.task('js', () => {
         .pipe(plumber())
         .pipe(babel({presets: ['env']}))
         .pipe(uglify())
+        .pipe(concat('scripts.js'))
         .pipe(gulp.dest('build/js/'))
 });
 
@@ -82,7 +83,12 @@ gulp.task('browser-sync', () => {
 // ghpages
 gulp.task('pages', () => {
     return gulp.src('./build/**/*')
-      .pipe(ghPages());
+    .pipe(
+        ghPages({
+          branch: 'master',
+          cacheDir: '.deploy'
+        })
+      )
 });
 
 // surge
