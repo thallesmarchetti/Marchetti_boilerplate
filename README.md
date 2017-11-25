@@ -2,6 +2,8 @@
 
 # Marchetti Boilerplate
 
+[![Known Vulnerabilities](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate/badge.svg)](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate)
+
 This is my first open source project, that provides me help to build a static website with quality and agility.
 
 ## Instructions
