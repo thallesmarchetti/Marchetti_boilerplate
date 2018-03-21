@@ -14,7 +14,6 @@ const   browserSync =   require('browser-sync'),
         nunjucks    =   require('gulp-nunjucks-html'),
         plumber     =   require('gulp-plumber'),
         stylus      =   require('gulp-stylus'),
-        surge       =   require('gulp-surge'),
         uglify      =   require('gulp-uglify');
 
 // Nunjucks
@@ -91,17 +90,7 @@ gulp.task('pages', () => {
       )
 });
 
-// surge
-gulp.task('surge', () => {
-    return surge({
-      project: './build',
-      domain: 'example.surge.sh'
-    })
-})
-
 // default
 gulp.task('default', ['nunjucks', 'js', 'stylus', 'images', 'watch', 'browser-sync']);
 // deploy-gh
 gulp.task('deploy-gh', ['nunjucks', 'js', 'stylus', 'images', 'pages']);
-// deploy-surge
-gulp.task('deploy-surge', ['nunjucks', 'js', 'stylus', 'images', 'surge']);
