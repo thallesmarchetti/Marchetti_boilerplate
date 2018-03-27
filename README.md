@@ -16,8 +16,8 @@ Make sure you have all these dependencies installed before moving on:
 
 ## Instructions
 
-1. Clone the project:
 ```bash
+1. Clone the project:
 $ git clone https://github.com/thallesmarchetti/marchetti-boilerplate.git
 
 2. Change directory to the cloned folder:
@@ -46,7 +46,7 @@ Building a project requires a few dependencies, they are needed only during deve
 - `gulp images`: compress image files
 - `gulp watch`: call for watch files
 - `gulp browser-sync`: inicialize a server
-- `gulp deploy-gh`: run all tasks and deploy files to gh-pages
+- `gulp deploy`: run all tasks and deploy files to gh-pages
 
 ### NPM Scripts
 
