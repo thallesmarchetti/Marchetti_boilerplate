@@ -50,8 +50,8 @@ Building a project requires a few dependencies, they are needed only during deve
 
 ### NPM Scripts
 
-- `npm run lint`: lint all js errors, prepush and precommit
-- `npm run fix`: fix all js errors
+- `npm run lint`: lint all files searching for errors, prepush and precommit.
+- `npm run lint:fix`: fix automaticaly some lint errors.
 
 ### Soon :soon:
 
@@ -59,7 +59,7 @@ I will introduce some automated tests.
 
 ### Contributing
 
-Feel free to contribute and improve the project.
+Feel free to contribute and improve the project. See [CONTRIBUTING.md](https://github.com/thallesmarchetti/Marchetti-boilerplate/CONTRIBUTING.md) for more information and how to get started.
 
 ### License
 
