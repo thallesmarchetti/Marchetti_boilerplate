@@ -1,4 +1,4 @@
-<img src="src/img/brand.png" align="right" width="80px" height="80px" />
+<img src="src/img/brand.png" align="right" width="100px" height="100px" />
 
 # Marchetti Boilerplate
 
@@ -39,13 +39,6 @@ Building a project requires a few dependencies, they are needed only during deve
 ### Tasks
 
 - `gulp`: run all tasks for development and initialize watch for changes and a server
-- `gulp -p`: run all tasks for production and initialize watch for changes and a server
-- `gulp nunjucks`: compile html files
-- `gulp javascript`: execute js files
-- `gulp stylus`: compile css files
-- `gulp images`: compress image files
-- `gulp watch`: call for watch files
-- `gulp browser-sync`: inicialize a server
 - `gulp deploy`: run all tasks and deploy files to gh-pages
 
 ### NPM Scripts
