@@ -52,7 +52,7 @@ I will introduce some automated tests.
 
 ### Contributing
 
-Feel free to contribute and improve the project. See [CONTRIBUTING.md](https://github.com/thallesmarchetti/Marchetti-boilerplate/CONTRIBUTING.md) for more information and how to get started.
+Feel free to contribute and improve the project. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information and how to get started.
 
 ### License
 
