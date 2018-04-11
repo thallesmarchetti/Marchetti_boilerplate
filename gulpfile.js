@@ -1,22 +1,19 @@
 "use strict";
 
-const   browserSync =   require('browser-sync'),
-        babel       =   require('gulp-babel'),
-        cache       =   require('gulp-cache'),
-        concat      =   require('gulp-concat'),
-        env         =   require('minimist')(process.argv.slice(2)),
-        ghPages     =   require('gulp-gh-pages'),
-        gulp        =   require('gulp'),
-        gulpif      =   require('gulp-if'),
-        gutil       =   require('gulp-util'),
-        imagemin    =   require('gulp-imagemin'),
-        message     =   require('./src/message'),
-        minifyHtml  =   require('gulp-minify-html'),
-        nunjucks    =   require('gulp-nunjucks-html'),
-        plumber     =   require('gulp-plumber'),
-        stylus      =   require('gulp-stylus'),
-        uglify      =   require('gulp-uglify');
-
+const   browserSync     =   require('browser-sync'),
+        babel           =   require('gulp-babel'),
+        concat          =   require('gulp-concat'),
+        cleanCSS        =   require('gulp-clean-css'),
+        env             =   require('minimist')(process.argv.slice(2)),
+        gulp            =   require('gulp'),
+        htmlmin         =   require('gulp-htmlmin'),
+        imagemin        =   require('gulp-imagemin'),
+        message         =   require('./src/message'),
+        ncu             =   require('npm-check-updates'),
+        nunjucksRender  =   require('gulp-nunjucks-render'),
+        plumber         =   require('gulp-plumber'),
+        stylus          =   require('gulp-stylus'),
+        uglify          =   require('gulp-uglify');
 /*
 |--------------------------------------------------------------------------
 | Nunjucks Tasks
@@ -25,11 +22,9 @@ const   browserSync =   require('browser-sync'),
 gulp.task('nunjucks', () => {
     return gulp.src('src/templates/*.html')
         .pipe(plumber())
-        .pipe(nunjucks({
-            searchPaths: ['src/templates/']
-        }))
+        .pipe(nunjucksRender({ path: ['src/templates/']}))
         .on('error', message.error('NUNJUCKS: Compilation'))
-        .pipe(gulpif(env.p, minifyHtml()))
+        .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('build/'));
 });
 /*
@@ -41,6 +36,7 @@ gulp.task('stylus', () => {
     gulp.src("src/styl/main.styl")
         .pipe(plumber())
         .pipe(stylus({compress: true }))
+        .on('error', message.error("stylus: building"))
         .pipe(gulp.dest("build/css"));
 });
 /*
@@ -121,20 +117,6 @@ gulp.task('browser-sync', () => {
 });
 /*
 |--------------------------------------------------------------------------
-| ghpages Task
-|--------------------------------------------------------------------------
-*/
-gulp.task('pages', () => {
-    return gulp.src('./build/**/*')
-    .pipe(
-        ghPages({
-          branch: 'master',
-          cacheDir: '.build'
-        })
-      )
-});
-/*
-|--------------------------------------------------------------------------
 | default task
 |--------------------------------------------------------------------------
 */
@@ -144,4 +126,4 @@ gulp.task('default', ['nunjucks', 'stylus', 'javascript', 'images', 'watch', 'br
 | deploy
 |--------------------------------------------------------------------------
 */
-gulp.task('deploy', ['nunjucks', 'javascript', 'stylus', 'images', 'pages']);
+gulp.task('deploy', ['nunjucks', 'javascript', 'stylus', 'images']);
