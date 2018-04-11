@@ -44,7 +44,7 @@ Building a project requires a few dependencies, they are needed only during deve
 ### NPM Scripts
 
 - `npm run lint`: lint all files searching for errors, prepush and precommit.
-- `npm run lint:fix`: fix automaticaly some lint errors.
+- `npm run fix`: fix automaticaly some lint errors.
 
 ### Soon :soon:
 
