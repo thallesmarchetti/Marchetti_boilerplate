@@ -29,6 +29,7 @@
     "gulp-imagemin": "^4.1.0",
     "gulp-minify-html": "^1.0.6",
     "gulp-notify": "^3.2.0",
+    "gulp-nunjucks-render": "^2.2.2",
     "gulp-plumber": "^1.2.0",
     "gulp-stylus": "^2.7.0",
     "gulp-uglify": "^3.0.0",
