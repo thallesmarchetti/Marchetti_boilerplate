@@ -1,5 +1,3 @@
-let print = () => {
-    return 'Hey, it works!';
-};
+const print = () => "Hey, it works!";
 
 console.log(print());
