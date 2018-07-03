@@ -39,7 +39,7 @@ Building a project requires a few dependencies, they are needed only during deve
 ### Tasks
 
 - `gulp`: run all tasks for development and initialize watch for changes and a server
-- `gulp deploy`: run all tasks and deploy files to gh-pages
+- `gulp deploy`: run all tasks to build
 
 ### NPM Scripts
 

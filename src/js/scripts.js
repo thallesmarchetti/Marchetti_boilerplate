@@ -1,5 +1,5 @@
-const a = 6;
-const b = 4;
-const c = a + b;
+let print = () => {
+    return 'Hey, it works!';
+};
 
-console.log(c);
+console.log(print());
