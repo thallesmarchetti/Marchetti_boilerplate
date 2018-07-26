@@ -1,4 +1,4 @@
-<img src="src/img/brand.png" align="right" width="100px" height="100px" />
+<img src="src/img/logo.png" align="right" width="100px" height="100px" />
 
 # Marchetti Boilerplate
 
