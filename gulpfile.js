@@ -1,9 +1,8 @@
-"use strict";
+'use strict';
 
 const   browserSync     =   require('browser-sync'),
         babel           =   require('gulp-babel'),
         concat          =   require('gulp-concat'),
-        cleanCSS 		= 	require('gulp-clean-css'),
         env             =   require('minimist')(process.argv.slice(2)),
         gulp            =   require('gulp'),
         htmlmin         =   require('gulp-htmlmin'),
@@ -18,22 +17,11 @@ const   browserSync     =   require('browser-sync'),
 |--------------------------------------------------------------------------
 */
 gulp.task('nunjucks', () => {
-    return gulp.src('src/templates/*.html')
+    return gulp.src('src/pages/*.html')
         .pipe(plumber())
         .pipe(nunjucksRender({ path: ['src/templates/']}))
         .pipe(htmlmin({collapseWhitespace: true}))
         .pipe(gulp.dest('build/'));
-});
-/*
-|--------------------------------------------------------------------------
-| CSS
-|--------------------------------------------------------------------------
-*/
-gulp.task('css', () => {
-    gulp.src("src/css/**/*.css")
-		.pipe(plumber())
-		.pipe(cleanCSS({compatibility: 'ie8'}))
-    	.pipe(gulp.dest("build/css"));
 });
 /*
 |--------------------------------------------------------------------------
@@ -81,11 +69,10 @@ gulp.task('images', () => {
 |
 */
 gulp.task('watch', () => {
-    gulp.watch('src/templates/**/*.html', ['nunjucks'])
-    gulp.watch('src/css/**/*.css', ['css'])
-    gulp.watch('src/styl/**/*.styl', ['stylus'])
-    gulp.watch('src/js/**/*.js', ['javascript'])
-    gulp.watch('src/img/**/*.{jpg,png,gif}', ['imagemin'])
+    gulp.watch('src/pages/**/*.html', ['nunjucks']);
+    gulp.watch('src/styl/**/*.styl', ['stylus']);
+    gulp.watch('src/js/**/*.js', ['javascript']);
+    gulp.watch('src/img/**/*.{jpg,png,gif}', ['imagemin']);
 });
 /*
 |--------------------------------------------------------------------------
@@ -107,7 +94,7 @@ gulp.task('browser-sync', () => {
 
    browserSync({
         files: ['./build/**/*.*'],
-        port : 8080,
+        port : 8000,
         server: {
             baseDir: './build/'
       }
@@ -118,10 +105,10 @@ gulp.task('browser-sync', () => {
 | default task
 |--------------------------------------------------------------------------
 */
-gulp.task('default', ['nunjucks', 'css', 'stylus', 'javascript', 'images', 'watch', 'browser-sync']);
+gulp.task('default', ['nunjucks', 'stylus', 'javascript', 'images', 'watch', 'browser-sync']);
 /*
 |--------------------------------------------------------------------------
 | deploy
 |--------------------------------------------------------------------------
 */
-gulp.task('build', ['nunjucks', 'javascript', 'stylus', 'images']);
+gulp.task('build', ['nunjucks', 'stylus', 'javascript', 'images']);
