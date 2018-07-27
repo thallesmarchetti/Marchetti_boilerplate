@@ -17,7 +17,7 @@ const   browserSync     =   require('browser-sync'),
 |--------------------------------------------------------------------------
 */
 gulp.task('nunjucks', () => {
-    return gulp.src('src/pages/*.html')
+    return gulp.src('src/*.html')
         .pipe(plumber())
         .pipe(nunjucksRender({ path: ['src/templates/']}))
         .pipe(htmlmin({collapseWhitespace: true}))
@@ -53,10 +53,10 @@ gulp.task('javascript', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('images', () => {
-    gulp.src('src/img/**/*')
+    gulp.src('src/images/**/*')
         .pipe(plumber())
         .pipe(imagemin({interlaced: true, progressive: true, optimizationLevel: 2}))
-        .pipe(gulp.dest('build/img'));
+        .pipe(gulp.dest('build/images'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +69,10 @@ gulp.task('images', () => {
 |
 */
 gulp.task('watch', () => {
-    gulp.watch('src/pages/**/*.html', ['nunjucks']);
+    gulp.watch('src/**/*.html', ['nunjucks']);
     gulp.watch('src/styl/**/*.styl', ['stylus']);
     gulp.watch('src/js/**/*.js', ['javascript']);
-    gulp.watch('src/img/**/*.{jpg,png,gif}', ['imagemin']);
+    gulp.watch('src/images/**/*.{jpg,png,gif}', ['imagemin']);
 });
 /*
 |--------------------------------------------------------------------------
@@ -88,7 +88,7 @@ gulp.task('browser-sync', () => {
    let files = [
       'build/**/*.html',
       'build/css/**/*.css',
-      'build/img/**/*',
+      'build/images/**/*',
       'build/js/**/*.js'
    ];
 
