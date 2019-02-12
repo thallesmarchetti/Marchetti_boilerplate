@@ -3,7 +3,6 @@
 # Marchetti Boilerplate
 
 [![Known Vulnerabilities](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate/badge.svg)](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate)
-
 [![devDependency Status](https://david-dm.org/thallesmarchetti/marchetti-boilerplate/dev-status.svg)](https://david-dm.org/thallesmarchetti/marchetti-boilerplate#info=devDependencies)
 
 This is my first open source project, that provides me help to build a static website organized, standardized web apps with quality and agility.
@@ -81,6 +80,7 @@ The basic structure of the project is given in the following way:
 ├── package.json
 ├── LICENSE.md
 └── README.md
+```
 
 ## Dependencies
 
