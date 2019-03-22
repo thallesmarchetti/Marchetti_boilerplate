@@ -25,10 +25,10 @@ $ git clone https://github.com/thallesmarchetti/marchetti-boilerplate.git
 2. Change directory to the cloned folder:
 $ cd marchetti-boilerplate
 
-3. Install required npm dependences:
+3. Install required dependences:
 $ npm install
 or
-$ yarn install
+$ yarn add
 
 4. Build project for development:
 $ gulp
