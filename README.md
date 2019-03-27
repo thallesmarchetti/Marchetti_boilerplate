@@ -28,7 +28,7 @@ $ cd marchetti-boilerplate
 3. Install required dependences:
 $ npm install
 or
-$ yarn add
+$ yarn
 
 4. Build project for development:
 $ gulp
@@ -84,7 +84,7 @@ The basic structure of the project is given in the following way:
 
 ## Dependencies
 
-Building a project requires a few dependencies, they are needed only during development and should not be installed on production. They will be installed along with your project dependencies when running  `yarn add` or `npm install`  command.
+Building a project requires a few dependencies, they are needed only during development and should not be installed on production. They will be installed along with your project dependencies when running  `yarn` or `npm install`  command.
 
 ### Tasks
 
