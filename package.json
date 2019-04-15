@@ -1,38 +1,33 @@
 {
-  "name": "marchetti-boilerplate",
-  "version": "1.0.0",
-  "description": "my first open source project",
-  "main": "gulpfile.js",
-  "scripts": {
-    "lint": "./node_modules/.bin/eslint src/js/*.js",
-    "fix": "./node_modules/.bin/eslint --fix src/js/*.js",
-    "precommit": "npm run lint",
-    "prepush": "npm run lint"
-  },
-  "keywords": [
-    "frontend",
-    "open",
-    "source"
-  ],
-  "author": "Thalles Marchetti <linkmarchetti@gmail.com> (http://thallesmarchetti.com/)",
-  "license": "MIT",
-  "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-preset-env": "^1.6.1",
-    "browser-sync": "^2.23.6",
-    "eslint": "^4.18.2",
-    "eslint-config-airbnb-base": "^12.1.0",
-    "eslint-plugin-import": "^2.9.0",
-    "gulp": "^3.9.1",
-    "gulp-babel": "^7.0.1",
-    "gulp-concat": "^2.6.1",
-    "gulp-htmlmin": "^4.0.0",
-    "gulp-imagemin": "^4.1.0",
-    "gulp-nunjucks-render": "^2.2.2",
-    "gulp-plumber": "^1.2.0",
-    "gulp-stylus": "^2.7.0",
-    "gulp-uglify": "^3.0.0",
-    "gulp-watch": "^5.0.0",
-    "husky": "^0.14.3"
-  }
+    "name": "marchetti-boilerplate",
+    "version": "2.0",
+    "description": "my first open source project",
+    "main": "gulpfile.js",
+    "scripts": {
+        "lint": "./node_modules/.bin/eslint app/javascript/*.js",
+        "fix": "./node_modules/.bin/eslint --fix app/javascript/*.js"
+    },
+    "keywords": [
+        "frontend",
+        "open source",
+        "nunjucks",
+        "gulp",
+    ],
+    "author": "Thalles Marchetti <linkmarchetti@gmail.com> (http://thallesmarchetti.com/)",
+    "license": "MIT",
+    "devDependencies": {
+        "browser-sync": "^2.23.6",
+        "eslint": "^4.18.2",
+        "eslint-config-airbnb-base": "^12.1.0",
+        "eslint-plugin-import": "^2.9.0",
+        "gulp": "^3.9.1",
+        "gulp-concat": "^2.6.1",
+        "gulp-htmlmin": "^4.0.0",
+        "gulp-imagemin": "^4.1.0",
+        "gulp-nunjucks-render": "^2.2.2",
+        "gulp-plumber": "^1.2.0",
+        "gulp-stylus": "^2.7.0",
+        "gulp-terser": "^1.1.7",
+        "gulp-watch": "^5.0.0"
+    }
 }

@@ -1,27 +1,25 @@
 'use strict';
 
-const   browserSync     =   require('browser-sync'),
-        babel           =   require('gulp-babel'),
-        concat          =   require('gulp-concat'),
-        env             =   require('minimist')(process.argv.slice(2)),
-        gulp            =   require('gulp'),
-        htmlmin         =   require('gulp-htmlmin'),
-        imagemin        =   require('gulp-imagemin'),
-        nunjucksRender  =   require('gulp-nunjucks-render'),
-        plumber         =   require('gulp-plumber'),
-        stylus          =   require('gulp-stylus'),
-        uglify          =   require('gulp-uglify');
+const browserSync = require('browser-sync'),
+    concat = require('gulp-concat'),
+    gulp = require('gulp'),
+    htmlmin = require('gulp-htmlmin'),
+    imagemin = require('gulp-imagemin'),
+    nunjucksRender = require('gulp-nunjucks-render'),
+    plumber = require('gulp-plumber'),
+    stylus = require('gulp-stylus'),
+    terser = require('gulp-terser');
 /*
 |--------------------------------------------------------------------------
 | Nunjucks Tasks
 |--------------------------------------------------------------------------
 */
 gulp.task('nunjucks', () => {
-    return gulp.src('src/*.html')
+    return gulp.src('app/*.html')
         .pipe(plumber())
-        .pipe(nunjucksRender({ path: ['src/templates/']}))
-        .pipe(htmlmin({collapseWhitespace: true}))
-        .pipe(gulp.dest('build/'));
+        .pipe(nunjucksRender({ path: ['app/views/'] }))
+        .pipe(htmlmin({ collapseWhitespace: true }))
+        .pipe(gulp.dest('public/'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -29,10 +27,10 @@ gulp.task('nunjucks', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('stylus', () => {
-    gulp.src("src/styl/main.styl")
+    gulp.src("app/stylus/main.styl")
         .pipe(plumber())
-        .pipe(stylus({compress: true }))
-        .pipe(gulp.dest("build/css"));
+        .pipe(stylus({ compress: true }))
+        .pipe(gulp.dest("public/css"));
 });
 /*
 |--------------------------------------------------------------------------
@@ -40,12 +38,11 @@ gulp.task('stylus', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('javascript', () => {
-    return gulp.src('src/js/**/*.js')
+    return gulp.src('app/javascript/**/*.js')
         .pipe(plumber())
-        .pipe(babel({presets: ['env']}))
-        .pipe(uglify())
-        .pipe(concat('scripts.js'))
-        .pipe(gulp.dest('build/js/'))
+        .pipe(terser())
+        .pipe(concat('index.js'))
+        .pipe(gulp.dest('public/js'))
 });
 /*
 |--------------------------------------------------------------------------
@@ -53,10 +50,10 @@ gulp.task('javascript', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('images', () => {
-    gulp.src('src/images/**/*')
+    gulp.src('app/images/**/*')
         .pipe(plumber())
-        .pipe(imagemin({interlaced: true, progressive: true, optimizationLevel: 2}))
-        .pipe(gulp.dest('build/images'));
+        .pipe(imagemin({ interlaced: true, progressive: true, optimizationLevel: 2 }))
+        .pipe(gulp.dest('public/images'));
 });
 /*
 |--------------------------------------------------------------------------
@@ -69,10 +66,10 @@ gulp.task('images', () => {
 |
 */
 gulp.task('watch', () => {
-    gulp.watch('src/**/*.html', ['nunjucks']);
-    gulp.watch('src/styl/**/*.styl', ['stylus']);
-    gulp.watch('src/js/**/*.js', ['javascript']);
-    gulp.watch('src/images/**/*.{jpg,png,gif}', ['imagemin']);
+    gulp.watch('app/**/*.html', ['nunjucks']);
+    gulp.watch('app/stylus/**/*.styl', ['stylus']);
+    gulp.watch('app/javascript/**/*.js', ['javascript']);
+    gulp.watch('app/images/**/*.{jpg,png,gif}', ['imagemin']);
 });
 /*
 |--------------------------------------------------------------------------
@@ -80,25 +77,25 @@ gulp.task('watch', () => {
 |--------------------------------------------------------------------------
 |
 | BrowserSync and starts a localhost development. Compiled
-| files are outputted into `build` directory, so we are
-| telling BrowserSync to to use it as a base.
+| files are outputted into `public` directory, so we are
+| telling BrowserSync to use it as a base.
 |
 */
 gulp.task('browser-sync', () => {
-   let files = [
-      'build/**/*.html',
-      'build/css/**/*.css',
-      'build/images/**/*',
-      'build/js/**/*.js'
-   ];
+    const files = [
+        'public/**/*.html',
+        'public/css/**/*.css',
+        'public/images/**/*',
+        'public/js/**/*.js'
+    ];
 
-   browserSync({
-        files: ['./build/**/*.*'],
-        port : 8000,
+    browserSync({
+        files: ['./public/**/*.*'],
+        port: 8000,
         server: {
-            baseDir: './build/'
-      }
-   });
+            baseDir: './public/'
+        }
+    });
 });
 /*
 |--------------------------------------------------------------------------
