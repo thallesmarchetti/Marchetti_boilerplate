@@ -10,8 +10,7 @@ const browserSync = require('browser-sync'),
     stylus = require('gulp-stylus'),
     terser = require('gulp-terser'),
     argv = require('yargs').argv,
-    gulpif = require('gulp-if'),
-    reload = browserSync.reload;
+    gulpif = require('gulp-if');
 
 const environment = argv.mode || 'development';
 const isProduction = environment === 'production';
