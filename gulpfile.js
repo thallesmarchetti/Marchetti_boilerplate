@@ -8,18 +8,66 @@ const browserSync = require('browser-sync'),
     nunjucksRender = require('gulp-nunjucks-render'),
     plumber = require('gulp-plumber'),
     stylus = require('gulp-stylus'),
-    terser = require('gulp-terser');
+    terser = require('gulp-terser'),
+    argv = require('yargs').argv,
+    gulpif = require('gulp-if');
+
+const environment = argv.mode || 'development';
+const isProduction = environment === 'production';
+
+const paths = {
+    source: {
+        html: [
+            'app/*.html',
+        ],
+        styles: [
+            "app/stylus/main.styl",
+        ],
+        scripts: [
+            'app/javascript/**/*.js',
+        ],
+        images: [
+            'app/images/**/*.{jpg,png,gif}',
+        ]
+    },
+    views: {
+        templates: 'app/views/',
+        source: 'app/views/**/*.html'
+    },
+    production: {
+        html: 'public/',
+        styles: "public/css",
+        scripts:'public/js',
+        images: 'public/images'
+    },
+    development: {
+        html:   'build/',
+        styles: "build/css",
+        scripts:'build/js',
+        images: 'build/images'
+    },
+    serve: {
+        baseDir: './build/',
+        pathList: [
+            'build/**/*.html',
+            'build/css/**/*.css',
+            'build/images/**/*',
+            'build/js/**/*.js'
+        ]
+    }
+}
+
 /*
 |--------------------------------------------------------------------------
 | Nunjucks Tasks
 |--------------------------------------------------------------------------
 */
 gulp.task('nunjucks', () => {
-    return gulp.src('app/*.html')
-        .pipe(plumber())
-        .pipe(nunjucksRender({ path: ['app/views/'] }))
-        .pipe(htmlmin({ collapseWhitespace: true }))
-        .pipe(gulp.dest('public/'));
+    return gulp.src(paths.source.html)
+    .pipe(plumber())
+    .pipe(nunjucksRender({ path: paths.views.templates }))
+    .pipe(gulpif(isProduction, htmlmin({ collapseWhitespace: true })))
+    .pipe(gulp.dest(paths[environment].html));
 });
 /*
 |--------------------------------------------------------------------------
@@ -27,10 +75,10 @@ gulp.task('nunjucks', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('stylus', () => {
-    gulp.src("app/stylus/main.styl")
-        .pipe(plumber())
-        .pipe(stylus({ compress: true }))
-        .pipe(gulp.dest("public/css"));
+    gulp.src(paths.source.styles)
+    .pipe(plumber())
+    .pipe(gulpif(isProduction, stylus({ compress: true }), stylus()))
+    .pipe(gulp.dest(paths[environment].styles));
 });
 /*
 |--------------------------------------------------------------------------
@@ -38,11 +86,11 @@ gulp.task('stylus', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('javascript', () => {
-    return gulp.src('app/javascript/**/*.js')
-        .pipe(plumber())
-        .pipe(terser())
-        .pipe(concat('index.js'))
-        .pipe(gulp.dest('public/js'))
+    return gulp.src(paths.source.scripts)
+    .pipe(plumber())
+    .pipe(gulpif(isProduction, terser()))
+    .pipe(concat('index.js'))
+    .pipe(gulp.dest(paths[environment].scripts))
 });
 /*
 |--------------------------------------------------------------------------
@@ -50,10 +98,10 @@ gulp.task('javascript', () => {
 |--------------------------------------------------------------------------
 */
 gulp.task('images', () => {
-    gulp.src('app/images/**/*')
-        .pipe(plumber())
-        .pipe(imagemin({ interlaced: true, progressive: true, optimizationLevel: 2 }))
-        .pipe(gulp.dest('public/images'));
+    gulp.src(paths.source.images)
+    .pipe(plumber())
+    .pipe(gulpif(isProduction, imagemin({ interlaced: true, progressive: true, optimizationLevel: 2 })))
+    .pipe(gulp.dest(paths[environment].images));
 });
 /*
 |--------------------------------------------------------------------------
@@ -66,10 +114,10 @@ gulp.task('images', () => {
 |
 */
 gulp.task('watch', () => {
-    gulp.watch('app/**/*.html', ['nunjucks']);
-    gulp.watch('app/stylus/**/*.styl', ['stylus']);
-    gulp.watch('app/javascript/**/*.js', ['javascript']);
-    gulp.watch('app/images/**/*.{jpg,png,gif}', ['imagemin']);
+    gulp.watch(paths.source.html.concat(paths.views.source), ['nunjucks']);
+    gulp.watch(paths.source.styles, ['stylus']);
+    gulp.watch(paths.source.scripts, ['javascript']);
+    gulp.watch(paths.source.images, ['imagemin']);
 });
 /*
 |--------------------------------------------------------------------------
@@ -82,18 +130,12 @@ gulp.task('watch', () => {
 |
 */
 gulp.task('browser-sync', () => {
-    const files = [
-        'public/**/*.html',
-        'public/css/**/*.css',
-        'public/images/**/*',
-        'public/js/**/*.js'
-    ];
 
     browserSync({
-        files: ['./public/**/*.*'],
+        files: paths.serve.pathList,
         port: 8000,
         server: {
-            baseDir: './public/'
+            baseDir: paths.serve.baseDir
         }
     });
 });
