@@ -26,8 +26,6 @@ $ git clone https://github.com/thallesmarchetti/marchetti-boilerplate.git
 $ cd marchetti-boilerplate
 
 3. Install required dependences:
-$ npm install
-or
 $ yarn
 
 4. Build project for development:
@@ -42,49 +40,36 @@ The basic structure of the project is given in the following way:
 
 ```
 │
-├── build/
-│   ├── css/
-│   │   └── main.css
-│   │   │
-│   ├── images/
-│   │   │
-│   ├── js/
-│   │   └── scripts.js
-│   │
-│   └── index.html
-│
-│
-├── src/
-│   │── templates/
+├── app/
+│   │── images/
+│   │── javascript/
+│   │    ├── scripts.js
+│   │── stylus/
+│   │    ├── main.styl
+│   │── views/
+│   │    │── content/
+│   │    │   ├── main.html
 │   │    │── includes/
 │   │    │   ├── footer.html
 │   │    │   ├── head.html
-│   │    │   └── header.html
-│   │    └── layout.html
-│   │
-│   │── styl/
-│   │    └── main.styl
-│   │
-│   │── js/
-│   │    └── scripts.js
-│   │
-│   │── images/
-│   │
+│   │    │   ├── header.html
+│   │    │── layout/
+│   │    │   ├── layout.html
+│   │    │
 │   └── index.html
 │
 ├── .editorconfig
 ├── .eslintrc
 ├── .gitignore
-├── CONTRIBUTING.md
 ├── gulpfile.js
-├── package.json
 ├── LICENSE.md
+├── package.json
 └── README.md
 ```
 
 ## Dependencies
 
-Building a project requires a few dependencies, they are needed only during development and should not be installed on production. They will be installed along with your project dependencies when running  `yarn` or `npm install`  command.
+Building a project requires a few dependencies, they are needed only during development and should not be installed on production. They will be installed along with your project dependencies when running  `yarn` command.
 
 ### Tasks
 
@@ -93,21 +78,8 @@ Building a project requires a few dependencies, they are needed only during deve
 
 ### Yarn Scripts
 
-- `yarn lint`: lint all files searching for errors, prepush and precommit.
-- `yarn fix`: fix automaticaly some lint errors.
-
-### NPM Scripts
-
-- `npm run lint`: lint all files searching for errors, prepush and precommit.
-- `npm run fix`: fix automaticaly some lint errors.
-
-### Soon :soon:
-
-I will introduce some automated tests.
-
-### Contributing
-
-Feel free to contribute and improve the project. See [CONTRIBUTING.md](CONTRIBUTING.md) for more information and how to get started.
+- `yarn dev`: run all tasks for development and initialize watch for changes and a server.
+- `yarn build`: run all tasks to build.
 
 ### License
 
