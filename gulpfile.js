@@ -10,25 +10,16 @@ const browserSync = require('browser-sync'),
     stylus = require('gulp-stylus'),
     terser = require('gulp-terser'),
     argv = require('yargs').argv,
-    gulpif = require('gulp-if');
-
-const environment = argv.mode || 'development';
-const isProduction = environment === 'production';
+    gulpif = require('gulp-if'),
+    environment = argv.mode || 'development',
+    isProduction = environment === 'production';
 
 const paths = {
     source: {
-        html: [
-            'app/*.html',
-        ],
-        styles: [
-            "app/stylus/main.styl",
-        ],
-        scripts: [
-            'app/javascript/**/*.js',
-        ],
-        images: [
-            'app/images/**/*.{jpg,png,gif}',
-        ]
+        html: ['app/*.html'],
+        styles: ["app/stylus/main.styl"],
+        scripts: ['app/javascript/**/*.js'],
+        images: ['app/images/**/*.{jpg,png,gif}']
     },
     views: {
         templates: 'app/views/',
@@ -62,23 +53,25 @@ const paths = {
 | Nunjucks Tasks
 |--------------------------------------------------------------------------
 */
-gulp.task('nunjucks', () => {
+gulp.task('nunjucks', done => {
     return gulp.src(paths.source.html)
     .pipe(plumber())
     .pipe(nunjucksRender({ path: paths.views.templates }))
     .pipe(gulpif(isProduction, htmlmin({ collapseWhitespace: true })))
     .pipe(gulp.dest(paths[environment].html));
+    done();
 });
 /*
 |--------------------------------------------------------------------------
 | Stylus Tasks
 |--------------------------------------------------------------------------
 */
-gulp.task('stylus', () => {
+gulp.task('stylus', done => {
     gulp.src(paths.source.styles)
     .pipe(plumber())
     .pipe(gulpif(isProduction, stylus({ compress: true }), stylus()))
     .pipe(gulp.dest(paths[environment].styles));
+    done();
 });
 /*
 |--------------------------------------------------------------------------
@@ -97,11 +90,12 @@ gulp.task('javascript', () => {
 | Images Tasks
 |--------------------------------------------------------------------------
 */
-gulp.task('images', () => {
+gulp.task('images', (done) => {
     gulp.src(paths.source.images)
     .pipe(plumber())
     .pipe(gulpif(isProduction, imagemin({ interlaced: true, progressive: true, optimizationLevel: 2 })))
     .pipe(gulp.dest(paths[environment].images));
+    done();
 });
 /*
 |--------------------------------------------------------------------------
@@ -113,11 +107,12 @@ gulp.task('images', () => {
 | for better performance.
 |
 */
-gulp.task('watch', () => {
-    gulp.watch(paths.source.html.concat(paths.views.source), ['nunjucks']);
-    gulp.watch(paths.source.styles, ['stylus']);
-    gulp.watch(paths.source.scripts, ['javascript']);
-    gulp.watch(paths.source.images, ['imagemin']);
+gulp.task('watch', done => {
+    gulp.watch(paths.source.html.concat(paths.views.source), gulp.parallel('nunjucks'));
+    gulp.watch(paths.source.styles, gulp.parallel('stylus'));
+    gulp.watch(paths.source.scripts, gulp.parallel('javascript'));
+    gulp.watch(paths.source.images, gulp.parallel('images'));
+    done();
 });
 /*
 |--------------------------------------------------------------------------
@@ -129,8 +124,7 @@ gulp.task('watch', () => {
 | telling BrowserSync to use it as a base.
 |
 */
-gulp.task('browser-sync', () => {
-
+gulp.task('browser-sync', done => {
     browserSync({
         files: paths.serve.pathList,
         port: 8000,
@@ -138,16 +132,17 @@ gulp.task('browser-sync', () => {
             baseDir: paths.serve.baseDir
         }
     });
+    done();
 });
 /*
 |--------------------------------------------------------------------------
 | default task
 |--------------------------------------------------------------------------
 */
-gulp.task('default', ['nunjucks', 'stylus', 'javascript', 'images', 'watch', 'browser-sync']);
+gulp.task('default', gulp.series('nunjucks', 'stylus', 'javascript', 'images', 'watch', 'browser-sync'));
 /*
 |--------------------------------------------------------------------------
 | deploy
 |--------------------------------------------------------------------------
 */
-gulp.task('build', ['nunjucks', 'stylus', 'javascript', 'images']);
+gulp.task('build', gulp.series('nunjucks', 'stylus', 'javascript', 'images'));
