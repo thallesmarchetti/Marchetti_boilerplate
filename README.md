@@ -76,7 +76,7 @@ Building a project requires a few dependencies, they are needed only during deve
 - `gulp`: run all tasks for development and initialize watch for changes and a server
 - `gulp deploy`: run all tasks to build
 
-### Yarn Scripts
+### Scripts
 
 - `yarn dev`: run all tasks for development and initialize watch for changes and a server.
 - `yarn build`: run all tasks to build.
