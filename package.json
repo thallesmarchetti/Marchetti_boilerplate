@@ -6,19 +6,19 @@
   "author": "Thalles Marchetti <linkmarchetti@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "start": "gulp --mode=development",
+    "dev": "gulp --mode=development",
     "build": "gulp --mode=production"
   },
   "devDependencies": {
-    "browser-sync": "^2.26.3",
+    "browser-sync": "^2.26.7",
     "eslint": "^5.16.0",
     "eslint-config-airbnb-base": "^13.1.0",
     "eslint-plugin-import": "^2.17.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-concat": "^2.6.1",
     "gulp-htmlmin": "^5.0.1",
     "gulp-if": "^2.0.2",
-    "gulp-imagemin": "^5.0.3",
+    "gulp-imagemin": "^6.0.0",
     "gulp-nunjucks-render": "^2.2.3",
     "gulp-plumber": "^1.2.1",
     "gulp-stylus": "^2.7.0",
