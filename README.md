@@ -1,6 +1,6 @@
 <img src="app/images/logo.png" align="right" width="100px" height="100px" />
 
-# Marchetti Boilerplate
+# Marchetti_boilerplate
 
 [![Known Vulnerabilities](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate/badge.svg)](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate)
 [![devDependency Status](https://david-dm.org/thallesmarchetti/marchetti-boilerplate/dev-status.svg)](https://david-dm.org/thallesmarchetti/marchetti-boilerplate#info=devDependencies)
