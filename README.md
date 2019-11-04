@@ -5,8 +5,7 @@
 [![Known Vulnerabilities](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate/badge.svg)](https://snyk.io/test/github/thallesmarchetti/marchetti-boilerplate)
 [![devDependency Status](https://david-dm.org/thallesmarchetti/marchetti-boilerplate/dev-status.svg)](https://david-dm.org/thallesmarchetti/marchetti-boilerplate#info=devDependencies)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
-[![GitHub forks](https://img.shields.io/github/forks/Naereen/StrapDown.js.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/thallesmarchetti/Marchetti_boilerplate/network)
-
+[![GitHub stars](https://img.shields.io/github/stars/thallesmarchetti/Marchetti_boilerplate?style=social)](https://github.com/thallesmarchetti/Marchetti_boilerplate/stargazers)
 
 This is my first open source project, that provides me help to build a static website organized, standardized web apps with quality and agility.
 
